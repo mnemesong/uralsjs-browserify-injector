@@ -1,0 +1,35 @@
+{
+  "name": "uralsjs-browserify-injector",
+  "version": "0.0.1",
+  "description": "UralsJs browserify injector",
+  "main": "js/src/index.js",
+  "scripts": {
+    "tsc": "tsc",
+    "build-test": "tsc && mocha ./js/test/**/*.js",
+    "build-dev": "tsc && browserify -r ./js/test/index.js:run > resources/bundle.js"
+  },
+  "keywords": [
+    "framework",
+    "frontend",
+    "spa",
+    "uralsjs",
+    "html"
+  ],
+  "author": "Anatoly Starodubtsev <tostar74@mail.ru>",
+  "license": "MIT",
+  "devDependencies": {
+    "mocha": "9.*",
+    "typescript": "^4.9.4",
+    "@types/mocha": "9.*",
+    "@types/node": "^13.*",
+    "browserify": "^17.*",
+    "uglify-js": "^3.17.4",
+    "@types/browserify": "^12.*"
+  },
+  "dependencies": {
+    "uralsjs-app-abstractions": "^0.1.*",
+    "uralsjs-id-html-tools": "^0.0.*",
+    "uralsjs-map-record": "^0.0.*",
+    "uralsjs-reactive-storage": "^0.0.*"
+  }
+}
