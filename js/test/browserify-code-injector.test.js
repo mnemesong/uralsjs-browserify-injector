@@ -23,7 +23,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var bci = __importStar(require("../src/browserify-code-injector"));
+var bci = __importStar(require("../src"));
 var mocha_1 = require("mocha");
 var assert_1 = require("assert");
 var path = __importStar(require("path"));

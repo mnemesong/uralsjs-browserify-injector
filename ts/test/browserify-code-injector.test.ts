@@ -1,4 +1,4 @@
-import * as bci from "../src/browserify-code-injector";
+import * as bci from "../src";
 import { describe, it } from "mocha";
 import { strictEqual, deepStrictEqual, notStrictEqual } from "assert";
 import * as path from "path";
