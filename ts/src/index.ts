@@ -20,11 +20,19 @@ export async function browserifyScript(
 export async function browserifyAndCallWithParams(
     codeFilePath: string,
     functionName: string,
-    filePseudonim: string|null = null,
+    filePseudonim: string,
     params: Array<unknown> = []
 ): Promise<string> {
-    const paramsStr = params.map(p => JSON.stringify(p)).join(", ");
     return browserifyScript(codeFilePath, filePseudonim)
-        .then(s => s + `\n(() => {\nconst ${filePseudonim} = require('${filePseudonim}');`
-            + `\nreturn ${filePseudonim}.${functionName}(${paramsStr});})();`)
+        .then(s => callCodeWithParams(s, functionName, filePseudonim, params))
+}
+
+export async function callCodeWithParams(
+    code: string,
+    functionName: string,
+    filePseudonim: string|null = null,
+    params: Array<unknown> = []
+) {
+    const paramsStr = params.map(p => JSON.stringify(p)).join(", ");
+    return code + `\nrequire('${filePseudonim}').${functionName}(${paramsStr});`;
 }

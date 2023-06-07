@@ -36,7 +36,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.browserifyAndCallWithParams = exports.browserifyScript = void 0;
+exports.callCodeWithParams = exports.browserifyAndCallWithParams = exports.browserifyScript = void 0;
 var browserify = require("browserify");
 function streamToString(stream) {
     var chunks = [];
@@ -57,16 +57,24 @@ function browserifyScript(codeFilePath, pseudonim) {
 }
 exports.browserifyScript = browserifyScript;
 function browserifyAndCallWithParams(codeFilePath, functionName, filePseudonim, params) {
+    if (params === void 0) { params = []; }
+    return __awaiter(this, void 0, void 0, function () {
+        return __generator(this, function (_a) {
+            return [2 /*return*/, browserifyScript(codeFilePath, filePseudonim)
+                    .then(function (s) { return callCodeWithParams(s, functionName, filePseudonim, params); })];
+        });
+    });
+}
+exports.browserifyAndCallWithParams = browserifyAndCallWithParams;
+function callCodeWithParams(code, functionName, filePseudonim, params) {
     if (filePseudonim === void 0) { filePseudonim = null; }
     if (params === void 0) { params = []; }
     return __awaiter(this, void 0, void 0, function () {
         var paramsStr;
         return __generator(this, function (_a) {
             paramsStr = params.map(function (p) { return JSON.stringify(p); }).join(", ");
-            return [2 /*return*/, browserifyScript(codeFilePath, filePseudonim)
-                    .then(function (s) { return s + "\n(() => {\nconst ".concat(filePseudonim, " = require('").concat(filePseudonim, "');")
-                    + "\nreturn ".concat(filePseudonim, ".").concat(functionName, "(").concat(paramsStr, ");})();"); })];
+            return [2 /*return*/, code + "\nrequire('".concat(filePseudonim, "').").concat(functionName, "(").concat(paramsStr, ");")];
         });
     });
 }
-exports.browserifyAndCallWithParams = browserifyAndCallWithParams;
+exports.callCodeWithParams = callCodeWithParams;
